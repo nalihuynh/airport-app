@@ -43,7 +43,8 @@ function AirportInfo() {
     return(
         // add more to the form, add first destination, second destination, and date
         // change value = {query} to value = {first dest., etc.}
-        <div className="airportinfo"> 
+        <div className="airportinfo">
+            <p>Enter a state, country, or city to search for your Airport</p>
            <form onSubmit={handleSubmit}>
                 <label htmlFor="queryInput">State, Country, or City:</label>
                 <input id="queryInput" value={query} onChange={e => setQuery(e.target.value)} required/>
