@@ -8,10 +8,10 @@ import RoutesInfo from './components/RoutesInfo';
 function App() {
   return (
     <div className="App">
-      <Header title="Airport App"></Header>
+      <Header title="Flight Search"></Header>
       <AirportInfo></AirportInfo>
       <RoutesInfo></RoutesInfo>
-      <Footer title="2021"></Footer>
+      <Footer title="Nali Huynh - 2021"></Footer>
     </div>
   );
 }

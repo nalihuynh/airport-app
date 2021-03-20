@@ -2,7 +2,6 @@ import React from 'react';
 import './Places.css';
 
 function Places(props) { 
-    // props.places.sort.map
     return(
         <div className="places">
             <table>

@@ -7,7 +7,6 @@ function RoutesInfo() {
     const [carriers,setCarriers] = useState([])
     const [places,setPlaces] = useState([])
     const [currencies,setCurrencies] = useState([])
-    // const [responses, setResponses] = useState([])
     const [showRoutes,setShowRoutes] = useState(false)
     
     const [originPlace, setOrigin] = useState("")
@@ -27,15 +26,9 @@ function RoutesInfo() {
                     "useQueryString": true
                 }
             }
-            // console.log(originPlace)
-            // console.log(destinationPlace)
-            // console.log(outboundDate)
-            // console.log(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/${originPlace}/${destinationPlace}/${outboundDate}`)
             let response = await fetch(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/${currency}/en-US/${originPlace}/${destinationPlace}/${outboundDate}`, reqOptions)
             response = await response.json()
-            // console.log(response.Routes)
             console.log(response)
-            //setResponses(response)
             setQuotes(response.Quotes)
             setCarriers(response.Carriers)
             setPlaces(response.Places)
@@ -43,37 +36,44 @@ function RoutesInfo() {
         }
         fetchMyAPI()
         setShowRoutes(true)
-        /*setOrigin("")
-        setDestination("")
-        setDate("")*/
     }
 
-    // <input id="originInput" value={originplace} onChange={e => setOrigin(e.target.value)} required/>
 
     return(
-        // add more to the form, add first destination, second destination, and date
-        // change value = {query} to value = {first dest., etc.}
         <div className="routesinfo"> 
-            <p>Enter your origin place Airport ID and destination place Airport ID, then enter your outbound date as "yyyy-mm-dd" or "anytime"</p>
-           <form onSubmit={handleSubmit}>
-                <label htmlFor="queryInput">Airport ID (Origin):</label>
-                <input id="queryInput" value={originPlace} onChange={e => setOrigin(e.target.value)} required/>
+        <h1>Flights</h1>
+            <ol>
+                <li>Find origin place <mark class = "red">Airport ID</mark> and destination place <mark class = "red">Airport ID</mark> above</li>
+                <li>Format outbound date as <mark class = "red">"yyyy-mm-dd", "yyyy-mm", or "anytime"</mark></li>
+                <li>Enter your currency as a <mark class = "red">3-Letter code </mark>(ex. USD, EUR, CAD, etc.)</li>
+            </ol>
+            
+                <form onSubmit={handleSubmit}>
+                <div class="forminfo">
+                    <div class="formrow">
+                        <label htmlFor="queryInput">Origin Place:</label>
+                        <input id="queryInput" value={originPlace} onChange={e => setOrigin(e.target.value)} required/>
 
-                <label htmlFor="queryInput">Airport ID (Destination):</label>
-                <input id="queryInput" value={destinationPlace} onChange={e => setDestination(e.target.value)} required/>
+                        <label htmlFor="queryInput">Destination Place:</label>
+                        <input id="queryInput" value={destinationPlace} onChange={e => setDestination(e.target.value)} required/>
+                    </div>
+                    
+                    <div class="formrow">
+                        <label htmlFor="queryInput">Outbound Date:</label>
+                        <input id="queryInput" value={outboundDate} onChange={e => setDate(e.target.value)} required/>
 
-                <label htmlFor="queryInput">Outbound Date (yyyy-mm-dd):</label>
-                <input id="queryInput" value={outboundDate} onChange={e => setDate(e.target.value)} required/>
+                        <label htmlFor="queryInput">Currency:</label>
+                        <input id="queryInput" value={currency} onChange={e => setCurrency(e.target.value)} required/>
+                    </div>
+                </div>
+                <button className="search">Search</button>
 
-                <label htmlFor="queryInput">Currency (3-Letter Code):</label>
-                <input id="queryInput" value={currency} onChange={e => setCurrency(e.target.value)} required/>
-                <button className="search">Submit</button>
-           </form>
+            </form>
+            
+           
            { showRoutes ? <Routes quotes={quotes} carriers={carriers} places={places} currencies={currencies}></Routes> : <></>}
         </div>
     )
-    // { showRoutes ? <Routes quotes={quotes} carriers={carriers} places={places} currencies={currencies}></Routes> : <></>}
-
 
 }
 

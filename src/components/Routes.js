@@ -2,8 +2,9 @@ import React from 'react';
 import './Routes.css';
 
 function Routes(props) { 
+    const symbol = props.currencies[0] ? props.currencies[0].Symbol : ""
     function getCarrierName(carrierId){
-        var carrierName = ""
+        let carrierName = ""
         props.carriers.forEach(carrier => {
             if (carrier.CarrierId === carrierId){
                 carrierName = carrier.Name
@@ -13,7 +14,7 @@ function Routes(props) {
     }
 
     function getPlaceName(placeId){
-        var placeName = ""
+        let placeName = ""
         props.places.forEach(place => {
             if (place.PlaceId === placeId){
                 placeName = place.Name
@@ -27,10 +28,9 @@ function Routes(props) {
             <table>
                 <thead>
                     <tr>
+                        <th>Prices</th>
                         <th>Origin</th>
                         <th>Destination</th>
-                        <th>Prices</th>
-                        <th>Carrier Id</th>
                         <th>Departure Date</th>
                         <th>Carrier Name</th>
                     </tr>
@@ -38,11 +38,10 @@ function Routes(props) {
                 <tbody>
                     {props.quotes.map(quote => {
                         return (<tr id={quote.QuoteId}>
+                            <th>{`${symbol}${quote.MinPrice}`}</th>
                             <th>{getPlaceName(quote.OutboundLeg.OriginId)}</th>
                             <th>{getPlaceName(quote.OutboundLeg.DestinationId)}</th>
-                            <th>{quote.MinPrice}</th>
-                            <th>{quote.OutboundLeg.CarrierIds}</th>
-                            <th>{quote.OutboundLeg.DepartureDate}</th>
+                            <th>{quote.OutboundLeg.DepartureDate.slice(0, -9)}</th>
                             <th>{getCarrierName(quote.OutboundLeg.CarrierIds[0])}</th>
                         </tr>)
                     })}

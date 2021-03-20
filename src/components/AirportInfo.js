@@ -7,9 +7,6 @@ function AirportInfo() {
     const [query,setQuery] = useState("")
     const [showPlaces,setShowPlaces] = useState(false)
 
-    // make hooks for first dest and second dest and date
-    // showRoutes
-
     function handleSubmit(e) {
         e.preventDefault()
         async function fetchMyAPI() {
@@ -21,14 +18,7 @@ function AirportInfo() {
                     "useQueryString": true
                 }
             }
-            // make these hooks
-            // const originplace = "SFO-sky"
-            // const destinationplace = "ORD-sky"
-            // const outbounddate = "anytime"
             let response = await fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/?" + new URLSearchParams({query: query}), reqOptions)
-            // let response = await fetch(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${originPlace}/${destinationPlace}/${outboundDate}` , reqOptions)
-            //+ new URLSearchParams({originplace: "SFO-sky", destinationplace: "ORD-sky", outboundpartialdate: "anytime"}), reqOptions)
-            //+ new URLSearchParams({query: {"inboundpartialdate": "2019-12-01"}}), reqOptions)
             response = await response.json()
             console.log(response.Places)
             setPlaces(response.Places)
@@ -37,18 +27,14 @@ function AirportInfo() {
         setShowPlaces(true)
         setQuery("")
     }
-
-    // <input id="originInput" value={originplace} onChange={e => setOrigin(e.target.value)} required/>
-
     return(
-        // add more to the form, add first destination, second destination, and date
-        // change value = {query} to value = {first dest., etc.}
         <div className="airportinfo">
-            <p>Enter a state, country, or city to search for your Airport</p>
+            <h1>Places to Airport ID</h1>
+            <p>Enter a state, country, or city to search for your Airport ID</p>
            <form onSubmit={handleSubmit}>
                 <label htmlFor="queryInput">State, Country, or City:</label>
                 <input id="queryInput" value={query} onChange={e => setQuery(e.target.value)} required/>
-                <button className="search">Submit</button>
+                <button className="search">Search</button>
            </form>
            { showPlaces ? <Places places={places}></Places> : <></>}
         </div>
