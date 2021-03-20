@@ -6,9 +6,6 @@ function AirportInfo() {
     const [places,setPlaces] = useState([])
     const [query,setQuery] = useState("")
     const [showPlaces,setShowPlaces] = useState(false)
-    const [originPlace, setOrigin] = useState("")
-    const [destinationPlace, setDestination] = useState("")
-    const [outboundDate, setDate] = useState("")
 
     // make hooks for first dest and second dest and date
     // showRoutes
